@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recharge index{% endblock %}
+
+{% block body %}
+    {% include "__fragments/nav.html.twig" %}    
+
+        <h2 class="mb-2">Liste des recharges </h2> 
+        <table id="myTable" class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Montant</th>
+                    <th>Reference</th>
+                    <th>Agence</th>
+                    <th>Code</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Etat</th>
+                    {# <th>Date Creation</th>
+                    <th>Date Modification</th> #}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for recharge in recharges %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ recharge.montant }}</td>
+                    <td>{{ recharge.Reference }}</td>
+                    <td>{{ recharge.Agence }}</td>
+                    <td>{{ recharge.Code }}</td>
+                    <td>{{ recharge.date }}</td>
+                    <td>{{ recharge.heure}}</td>
+                    <td> 
+                        {% if recharge.etat %} 
+                            <span class="badge text-bg-success">Utilisé</span>
+                        {% else %}
+                            <span class="badge text-bg-danger">Non </span>
+                        {% endif %}
+                    <td>
+                        <a href="{{ path('app_recharge_edit', {'id': recharge.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
+        <a class="btn btn-success mt-4" href="{{ path('app_recharge_new') }}"><i class="bi bi-plus-circle mx-2"></i>Créer une recharge</a>
+
+
+        
+    </div>
+    <!-- End Hero -->{% endblock %}
+{% block javascripts %}
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si le message Flash "success" est présent
+            {% if app.request.hasPreviousSession() and app.request.session.flashBag.has('success') %}
+                // Afficher le modal SweetAlert après le chargement de la page
+                Swal.fire({
+                    title: 'Succès !',
+                    text: "L'opération a été un succès.",
+                    icon: 'success',
+                    confirmButtonColor : '#008060'
+                });
+            {% endif %}
+
+            // Supprimer le message Flash "success" pour qu'il ne soit pas affiché à nouveau après un rechargement de page
+            {% if app.request.hasPreviousSession() %}
+                {% set flashMessages = app.request.session.flashBag.get('success') %}
+            {% endif %}
+        });
+    </script>
+{% endblock %}

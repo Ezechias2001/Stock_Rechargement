@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+
+    <label> Copier le texte et procéder à une extraction intelligente </label>
+    {{ form_row(form.texte) }}
+
+     <span class="divider-center my-4">Ou la créer manuellement</span>
+    
+    {{ form_row(form.montant) }}
+    {{ form_row(form.Reference) }}
+    <div class="form-check form-switch mt-4 mb-4">
+        {{ form_row(form.etat) }}
+        <label class="form-check-label" for="formSwitch1">Etat</label>
+    </div>
+    <div class="bottom-0 end-0">    
+        <button class="btn btn-success">{{ button_label|default('Créer') }}</button>
+    </div>
+{{ form_end(form) }}

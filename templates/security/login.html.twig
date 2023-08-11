@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+           Vous êtes déjà connecté {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se deconnecter</a>
+        </div>
+    {% endif %}
+    <div class="container content-space-0 content-space-t-md-3">
+        <div class="mx-auto" style="max-width: 30rem;">
+            <h1 class="h3 mb-3 font-weight-normal text-center">Connectez-vous</h1>
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2" autocomplete="email" required autofocus>
+            <label for="inputPassword">Mot de Passe </label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+            <div class="d-grid mb-4">
+                <button class="btn btn-success mt-5" type="submit">
+                    Se connecter
+                </button>
+            </div>
+            <div class="text-center" > Vous n'avez pas de compte ? <a href="{{path('app_register')}}">Incrivez-vous</a> </div>
+        </div>
+    </div>
+</form>
+
+{# <!-- Content -->
+<div class="bg-soft-success">
+  <div class="container content-space-1 content-space-t-md-3">
+    <div class="mx-auto" style="max-width: 30rem;">
+      <!-- Card -->
+      <div class="card card-lg zi-2">
+        <!-- Header -->
+        <div class="card-header text-center">
+          <h4 class="card-title">Log in</h4>
+          <p class="card-text">Don't have an account yet? <a class="link" href="../page-signup.html">Sign up here</a></p>
+        </div>
+        <!-- End Header -->
+
+        <!-- Card Body -->
+        <div class="card-body">
+          <form class="js-validate need-validate" novalidate>
+            <div class="d-grid">
+              <a class="btn btn-white btn-lg" href="#">
+                <span class="d-flex justify-content-center align-items-center">
+                  <img class="avatar avatar-xss me-2" src="../assets/svg/brands/google-icon.svg" alt="Image Description">
+                  Log in with Google
+                </span>
+              </a>
+            </div>
+
+            <span class="divider-center my-4">OR</span>
+
+            <!-- Form -->
+            <div class="mb-4">
+              <label class="form-label" for="loginFormEmail">Your email</label>
+              <input type="email" class="form-control" name="loginFormEmailName" id="loginFormEmail" placeholder="email@site.com" aria-label="email@site.com" required>
+              <span class="invalid-feedback">Please enter a valid email address.</span>
+            </div>
+            <!-- End Form -->
+
+            <!-- Form -->
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label" for="loginFormPassword">Password</label>
+                <a class="form-label-link" href="../page-reset-password.html">Forgot Password?</a>
+              </div>
+
+              <div class="input-group input-group-merge">
+                <input type="password" class="js-toggle-password form-control" name="loginFormPasswordName" id="loginFormPassword" placeholder="8+ characters required" aria-label="8+ characters required" required
+                       data-hs-toggle-password-options='{
+                         "target": "#loginFormChangePassTarget",
+                         "defaultClass": "bi-eye-slash",
+                         "showClass": "bi-eye",
+                         "classChangeTarget": "#changePassIcon"
+                       }'>
+                <a id="loginFormChangePassTarget" class="input-group-append input-group-text" href="javascript:;">
+                  <i id="changePassIcon" class="bi-eye"></i>
+                </a>
+              </div>
+              <span class="invalid-feedback">Your password is invalid. Please try again.</span>
+            </div>
+            <!-- End Form -->
+
+            <!-- Checkbox -->
+            <div class="form-check mb-4">
+              <input type="checkbox" class="form-check-input" id="loginFormRememberMeCheck" name="loginFormRememberMeCheck">
+              <label class="form-check-label" for="loginFormRememberMeCheck"> Remember me</label>
+            </div>
+            <!-- End Checkbox -->
+
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn btn-primary btn-lg">Log in</button>
+            </div>
+          </form>
+        </div>
+        <!-- End Card Body -->
+      </div>
+      <!-- End Card -->
+    </div>
+  </div>
+</div>
+<!-- End Content --> #}
+{# 
+<!-- Shape -->
+<div class="shape-container">
+  <div class="shape shape-bottom zi-1">
+    <svg viewBox="0 0 3000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 1000V583.723L3000 0V1000H0Z" fill="#fff"/>
+    </svg>
+  </div>
+</div>
+<!-- End Shape --> #}
+
+{% endblock %}

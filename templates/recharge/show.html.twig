@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recharge{% endblock %}
+
+{% block body %}
+    <h1>Recharge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ recharge.id }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ recharge.montant }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ recharge.Reference }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ recharge.date }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ recharge.etat ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_recharge_index') }}">back to list</a>
+
+    <a href="{{ path('app_recharge_edit', {'id': recharge.id}) }}">edit</a>
+
+    {{ include('recharge/_delete_form.html.twig') }}
+{% endblock %}
